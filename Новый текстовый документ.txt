@@ -1,0 +1,32 @@
+не занижайте оценку плиииииииис 🍋🍋🍋🍋🍋🍋🍋🍋🍋🍋
+
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = 'username', 'password1', 'password2'
+
+
+
+class SingInForm(forms.Form):
+    username = forms.CharField(label='Username', widget=forms.TextInput())
+    password = forms.CharField
+
+    def check_username(self):
+        username = self.cleaned_data['username']
+        if username in ['пидорасы']:
+            raise forms.ValidationError(message='это не пидорпсы это нелюди')
+        return username
+
+def check_email(self):
+    email = self.cleaned_data.get('email')
+    if 'spam' in email:
+        raise forms.ValidationError("Адрес электронной почты не может содержать слово 'spam'.")
+    return email
+
+def check_password(self):
+    password1 = self.cleaned_data.get("password1")
+    password2 = self.cleaned_data.get("password2")
+    if password1 and password2 and password1 != password2:
+        raise forms.ValidationError("Пароли не совпадают.")
+    return password2
